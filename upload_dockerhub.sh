@@ -1,20 +1,22 @@
 #!/bin/bash
 
-# Build the Docker image
-docker build -t chhofi/edge-functions .
+# Enable experimental features for Docker Buildx
+export DOCKER_CLI_EXPERIMENTAL=enabled
 
-# Check if the build was successful
+# Create and use a new builder that supports multiple platforms
+docker buildx create --use --name mybuilder
+docker buildx inspect --bootstrap
+
+# Build the Docker image for linux/amd64 platform
+docker buildx build --platform linux/amd64 -t chhofi/edge-functions --push .
+
+# Check if the build and push were successful
 if [ $? -eq 0 ]; then
-  echo "Docker image built successfully. Pushing to Docker Hub..."
-  
-  # Push the Docker image to Docker Hub
-  docker push chhofi/edge-functions
-  
-  if [ $? -eq 0 ]; then
-    echo "Docker image pushed successfully."
-  else
-    echo "Failed to push the Docker image."
-  fi
+  echo "Docker image built and pushed successfully to Docker Hub."
 else
-  echo "Docker build failed. Not pushing to Docker Hub."
+  echo "Docker build or push failed."
 fi
+
+# Clean up the builder
+docker buildx rm mybuilder
+

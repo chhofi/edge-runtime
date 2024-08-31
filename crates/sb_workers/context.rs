@@ -76,8 +76,8 @@ impl Default for UserWorkerRuntimeOpts {
             memory_limit_mb: 512,
             worker_timeout_ms: 5 * 60 * 1000,
             low_memory_multiplier: 5,
-            cpu_time_soft_limit_ms: 50,
-            cpu_time_hard_limit_ms: 100,
+            cpu_time_soft_limit_ms: 5000,
+            cpu_time_hard_limit_ms: 10000,
 
             force_create: false,
             key: None,
