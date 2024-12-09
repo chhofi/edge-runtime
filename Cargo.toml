@@ -51,7 +51,7 @@ deno_permissions = "0.21.0"
 
 # crypto
 hkdf = "0.12.3"
-rsa = { version = "0.9.3", default-features = false, features = ["std", "pem", "hazmat"] } # hazmat needed for PrehashSigner in crates/node
+rsa = { version = "0.9.7", default-features = false, features = ["std", "pem", "hazmat"] } # hazmat needed for PrehashSigner in crates/node
 
 # unix
 nix = "=0.26.2"
